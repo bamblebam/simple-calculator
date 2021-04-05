@@ -1,7 +1,8 @@
 from tkinter import *
+import math
 
 window = Tk()
-window.geometry("350x460")
+window.geometry("360x520")
 window.title = "calculator"
 headlabel = Label(window, text="CALCULATOR", bg='dark gray',
                   font=('times', 16)).pack(side=TOP)
@@ -19,7 +20,10 @@ def clickbutton(number):
 
 def operatorbutton():
     global operator
-    add = str(eval(operator))
+    operator = operator.replace('log', 'math.log10').replace(
+        'ln', 'math.log').replace('sqrt', 'math.sqrt')
+    add = eval(operator)
+    add = str(add)
     input.set(add)
     operator = add
 
@@ -68,8 +72,16 @@ buttonclear = Button(window, command=clear, text='CE', padx=14, pady=14, font=(
     'courier new', 12, 'bold')).place(x=270, y=170)
 buttonpower = Button(window, command=exit, text='AC', padx=14, pady=14, font=(
     'courier new', 12, 'bold')).place(x=270, y=100)
-buttonexp = Button(window, command=lambda: clickbutton('**'), text='**',
+buttonexp = Button(window, command=lambda: clickbutton('**'), text='X^y',
                    padx=14, pady=14, font=('courier new', 12, 'bold')).place(x=10, y=380)
+buttonlog = Button(window, command=lambda: clickbutton('log'), text='log',
+                   padx=14, pady=14, font=('courier new', 12, 'bold')).place(x=100, y=380)
+buttonln = Button(window, command=lambda: clickbutton('ln'), text='ln',
+                  padx=14, pady=14, font=('courier new', 12, 'bold')).place(x=190, y=380)
+buttonsqrt = Button(window, command=lambda: clickbutton('sqrt'), text='sqrt',
+                    padx=14, pady=14, font=('courier new', 12, 'bold')).place(x=270, y=380)
+buttonquotient = Button(window, command=lambda: clickbutton('//'), text='quotient',
+                        padx=14, pady=14, font=('courier new', 12, 'bold')).place(x=10, y=450)
 buttonbracketstart = Button(window, command=lambda: clickbutton(
     '('), text='(', padx=14, pady=14, font=('courier new', 12, 'bold')).place(x=270, y=310)
 buttonbracketend = Button(window, command=lambda: clickbutton(
